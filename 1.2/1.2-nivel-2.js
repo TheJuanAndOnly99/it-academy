@@ -2,9 +2,10 @@
 // Exercici 1
 // Crea una arrow function que, rebent un paràmetre, retorni un objecte amb un atribut que tingui com a valor el paràmetre rebut.
 
-const createPerson = name => ({ name: name });
+createPerson = name => ({ name: name });
 
 const person1 = createPerson('Juan');
+
 console.log(person1);
 
 // Exercici 2
@@ -16,7 +17,7 @@ class Persona {
   }
   
   dirNom() {
-    console.log(this.nom);
+    console.log(`Hola, em dic ${this.nom}!`);
   }
 }
 
