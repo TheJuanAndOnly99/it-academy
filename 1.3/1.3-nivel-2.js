@@ -89,3 +89,6 @@ getEmployee(7)
     .then(res => console.log(res))
     .catch(err => console.log(err.message))
   .catch(err => console.log(err.message));
+
+module.exports.getEmployee = getEmployee;
+module.exports.getSalary = getSalary;
