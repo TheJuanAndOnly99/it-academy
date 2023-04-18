@@ -17,7 +17,7 @@ createPromise(true)
   .then(res => console.log(res))
   .catch(err => console.log(err.message));
 
-  createPromise(false)
+createPromise(false)
   .then(res => console.log(res))
   .catch(err => console.log(err.message));
 
@@ -25,14 +25,14 @@ createPromise(true)
 // Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge o un altre (que s'imprimirà per consola) en funció del paràmetre rebut.
 
 let voterStatus = vote => {
-  vote ? console.log("You can vote!") : console.log("You cannot vote :(")
+  vote ? console.log("You can vote!") : console.log("Sorry, you cannot vote :(")
 }
 
-let checkAge = (age, callBack) => {
+let checkVoterStatus = (age, callBack) => {
   const canVote = age < 18 ? false : true;
   callBack(canVote);
 }
 
-checkAge(18, voterStatus)
-checkAge(7, voterStatus)
+checkVoterStatus(18, voterStatus)
+checkVoterStatus(7, voterStatus)
 
