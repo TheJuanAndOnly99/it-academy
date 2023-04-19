@@ -1,18 +1,38 @@
 // Level 3
 // Escriu una function creadora d'objectes que faci instàncies d'una classe abstracta. Invoca-la amb diferents definicions.
 
+// Las clases abstractas se pueden definir como clases que no se pueden instanciar.
+// No hay una palabra clave "abstract" en JavaScript para declarar una clase como una clase abstracta.
+
 function createPerson(fName, lName, age) {
   class Person  {
     constructor(fName, lName, age) {
       this.fName = fName;
       this.lName = lName;
       this.age = age;
+      
+    if (this.constructor === Person) {
+      throw new Error('You can not create an instance of Abstract Class'); 
+      }
+    }
+      
+    sayName(){
+      console.log(`Hello my name is ${this.fName}`)
     }
   }
 
-  let person = new Person(fName, lName, age);
-  console.log(person);
+  class Teacher extends Person {
+    constructor(fName, lName, age) {
+        super(fName, lName, age)
+    }
+  }
+
+  return new Teacher(fName, lName, age);
+  
 }
 
-createPerson("Dave", "Stevenson", 25);
-createPerson("Steve", "Davidson", 22);
+const david = createPerson("Dave", "Stevenson", 25);
+const steve = createPerson("Steve", "Davidson", 22);
+
+console.log(david);
+david.sayName();
