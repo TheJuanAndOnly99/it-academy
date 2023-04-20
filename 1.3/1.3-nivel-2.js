@@ -30,7 +30,7 @@ const getEmployee = (id) => {
     const salary = salaries.find((salary) => salary.id === id);
 
     if (employee && salary) {
-      // spread syntax
+      // the spread syntax creates a new object merging the employee and salary objects
       resolve({...employee, ...salary});
     } else {
       reject(new Error(`Employee with ID: ${id} not found`));
@@ -90,5 +90,6 @@ getEmployee(7)
     .catch(err => console.log(err.message))
   .catch(err => console.log(err.message));
 
+// export functions
 module.exports.getEmployee = getEmployee;
 module.exports.getSalary = getSalary;
