@@ -61,6 +61,7 @@ const getSalary = (employee) => {
 
 const logEmployeeSalary = async (id) => {
   try {
+    // Throw error if the parameter passed to the logEmpployeeSalary is not of type 'number' or NaN
     if (typeof id !== 'number' || isNaN(id)) {
       throw new TypeError('Invalid argument: id must be a number');
     }

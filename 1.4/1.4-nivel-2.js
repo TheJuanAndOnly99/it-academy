@@ -14,21 +14,22 @@ doubleAfter2Seconds(2).then(res => console.log(res));
 // Crea una altra funció que rebi tres números i calculi la suma dels seus dobles fent servir la funció anterior.
 
 async function sumDoubles(x, y, z) {
-  const double1 = await doubleAfter2Seconds(x);
-  const double2 = await doubleAfter2Seconds(y);
-  const double3 = await doubleAfter2Seconds(z);
-  return double1 + double2 + double3;
+  const doubleX = await doubleAfter2Seconds(x);
+  const doubleY = await doubleAfter2Seconds(y);
+  const doubleZ = await doubleAfter2Seconds(z);
+  return doubleX + doubleY + doubleZ;
 }
 
 sumDoubles(1, 2, 3).then(res => console.log(res));
 
-
-// V2 - refactor sumDoubles function
-// Use spread syntax to create array of input numbers and Promise.all to wait for all the promises to resolve
+// V2 - refactor sumDoubles function to remove repeated code
+// Use spread syntax to create array called nums containing the input numbers.
+// Use .map() method to iterate through the nums array and pass each number to the doubleAfter2Seconds function. 
+// Use Promise.all to wait for all the promises to resolve
 
 async function sumDoublesV2(...nums) {
   const doubles = await Promise.all(nums.map(num => doubleAfter2Seconds(num)));
-  // return the sum of the doubles array
+  // return the sum of the doubles array using the .reduce() method
   return doubles.reduce((total, num) => total + num, 0);
 }
 

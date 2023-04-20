@@ -1,6 +1,7 @@
 // Nivel 1
 // Exercici 1
 // Crea una funció asíncrona que rebi un id d'empleat/da i imprimeixi per pantalla el nom de l'empleat/da i el seu salari, usant les funcions getEmployee() i getSalary() que has definit a la tasca anterior.
+const getEmployeeInfo = require ('../1.3/1.3-nivel-2');
 
 let employees = [{
   id: 1,
@@ -24,38 +25,10 @@ let salaries = [{
   salary: 2000
 }];
 
-const getEmployee = (id) => {
-  return new Promise((resolve, reject) => {
-    const employee = employees.find((employee) => employee.id === id);
-    const salary = salaries.find((salary) => salary.id === id);
-
-    if (employee && salary) {
-      // spread syntax
-      resolve({...employee, ...salary});
-    } else {
-      reject(new Error(`Employee with ID: ${id} not found`));
-    }
-  })
-}
-
-const getSalary = (employee) => {  
-  const id = employee.id;
-  return new Promise((resolve, reject) => {
-    const salaryObj = salaries.find(( salary => salary.id === id))
-    if (salaryObj !== undefined) {
-      let employeeSalary = {...salaryObj, ...employee}
-      resolve(`Employee: ${employeeSalary.name} has salary: ${employeeSalary.salary}`);
-    } else {
-      reject(new Error(`Employee ${employee.name} not found`))
-    }
-  })
-  
-}
-
 const logEmployeeSalary = async (id) => {
   try {
-    const employee = await getEmployee(id);
-    const salary = await getSalary(employee);
+    const employee = await getEmployeeInfo.getEmployee(id);
+    const salary = await getEmployeeInfo.getSalary(employee);
     console.log(salary);
   } catch (error) {
     console.error(error.message);
