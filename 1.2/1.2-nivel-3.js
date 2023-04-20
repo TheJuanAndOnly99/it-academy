@@ -17,13 +17,17 @@ function createPerson(fName, lName, age) {
     }
       
     sayName(){
-      console.log(`Hello my name is ${this.fName}`)
+      throw new Error('Abstract method makeSound() must be overridden in subclasses.');
     }
   }
 
   class Teacher extends Person {
     constructor(fName, lName, age) {
         super(fName, lName, age)
+    }
+
+    sayName(){
+      console.log(`Hello my name is ${this.fName}`)
     }
   }
 
