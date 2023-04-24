@@ -2,16 +2,13 @@
 // Exercici 1
 // Mostra per consola el nom i cognoms de l'usuari/ària mitjançant template literals, guardant-los en variables i referenciant-les en la impressió del missatge.
 
-let nom = "Juan"
-let cognom = "Estrella"
+const firstName = "Juan"
+const lastName = "Estrella"
 
-console.log(`Hello my name is ${nom} ${cognom}`)
-
-const fName = "Juan"
-const lName = "Estrella"
+console.log(`Hello my name is ${firstName} ${lastName}`)
 
 function showFullName() {
-  console.log(`Hola el meu nom és ${fName} y el meu cognome es ${lName}`)
+  console.log(`Hola el meu nom és ${firstName} y el meu cognome es ${lastName}`)
 }
 
 showFullName();
@@ -19,8 +16,8 @@ showFullName();
 // Exercici 1 V2 
 
 function showFullNameV2(firstName, lastName) {
-  let firstNameUpperCase = firstName.charAt(0).toUpperCase() + firstName.slice(1);
-  let lastNameUpperCase = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+  const firstNameUpperCase = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  const lastNameUpperCase = lastName.charAt(0).toUpperCase() + lastName.slice(1);
   console.log(`Hola el meu nom és ${firstNameUpperCase} y el meu cognome es ${lastNameUpperCase}`)
 }
 
