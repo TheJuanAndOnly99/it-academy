@@ -49,7 +49,7 @@ const bob = createPersonObject('Spongebob', 'Squarepants', 22);
 patrick.check();
 patrick.sayName();
 
-bob.check();
+bob.check(); // returns true for both the Person & Teacher class
 bob.sayName();
 
 
