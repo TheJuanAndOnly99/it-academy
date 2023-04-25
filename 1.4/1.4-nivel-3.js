@@ -8,3 +8,7 @@ logEmployeeSalary(5);
 logEmployeeSalary(null);
 logEmployeeSalary(undefined);
 logEmployeeSalary("Thomas");
+
+doubleAfter2Seconds('Hi');
+
+sumDoubles(1, 5, "hi"); // 
