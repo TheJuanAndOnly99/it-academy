@@ -2,7 +2,7 @@
 // Exercici 1
 // Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise efectuant la cerca en l'objecte pel seu id.
 
-let employees = [{
+const employees = [{
   id: 1,
   name: 'Linus Torvalds'
 }, {
@@ -13,7 +13,7 @@ let employees = [{
   name: 'Jeff Bezos'
 }];
 
-let salaries = [{
+const salaries = [{
   id: 1,
   salary: 4000
 }, {
@@ -26,14 +26,22 @@ let salaries = [{
 
 const getEmployee = (id) => {
   return new Promise((resolve, reject) => {
-    const employee = employees.find((employee) => employee.id === id);
-    const salary = salaries.find((salary) => salary.id === id);
-
-    if (employee && salary) {
-      // the spread syntax creates a new object merging the employee and salary objects
-      resolve({...employee, ...salary});
-    } else {
-      reject(new Error(`Employee with ID: ${id} not found`));
+    // Throw error if the parameter passed to the getEmployee function is not of type 'number' or NaN
+    if (typeof id !== 'number' || isNaN(id)) {
+      throw new TypeError('Invalid argument: id must be a number');
+    }
+    try {
+      const employee = employees.find((employee) => employee.id === id);
+      const salary = salaries.find((salary) => salary.id === id);
+  
+      if (employee && salary) {
+        // spread syntax
+        resolve({...employee, ...salary});
+      } else {
+        reject(new Error(`Employee with ID: ${id} not found`));
+      } 
+    } catch (error) {
+      reject(error);
     }
   })
 }
@@ -54,17 +62,25 @@ getEmployee(6)
 // Crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee i retorni el seu salari.
 
 const getSalary = (employee) => {  
-  const id = employee.id;
   return new Promise((resolve, reject) => {
-    const salaryObj = salaries.find(( salary => salary.id === id))
-    if (salaryObj !== undefined) {
-      let employeeSalary = {...salaryObj, ...employee}
-      resolve(`Employee: ${employeeSalary.name} has salary: ${employeeSalary.salary}`);
-    } else {
-      reject(new Error(`Employee ${employee.name} not found`))
+    // Throw error if the parameter passed to the getSalary function is not an object with an id of type number and a name of type string.
+    if (typeof employee.id !== 'number' && typeof employee.name !== 'string') {
+      throw new TypeError('Invalid argument: id must be a number and name must be a string');
+    }
+    try {
+      const id = employee.id;
+      const salaryObj = salaries.find((salary => salary.id === id));
+
+      if (salaryObj !== undefined) {
+        let employeeSalary = {...salaryObj, ...employee};
+        resolve(`Employee: ${employeeSalary.name} has salary: ${employeeSalary.salary}`);
+      } else {
+        reject(new Error(`Employee ${employee.name} not found`));
+      }
+    } catch (error) {
+      reject(error);
     }
   })
-  
 }
 
 getSalary({id: 3, name: 'Jeff Bezos'})
@@ -72,6 +88,10 @@ getSalary({id: 3, name: 'Jeff Bezos'})
   .catch(err => console.log(err.message));
 
 getSalary({id: 5, name: 'Beff Jezos'})
+  .then(res => console.log(res))
+  .catch(err => console.log(err.message));
+
+getSalary({id: 'Beff Jezos', name: 5})
   .then(res => console.log(res))
   .catch(err => console.log(err.message));
 
