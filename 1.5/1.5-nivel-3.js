@@ -55,6 +55,7 @@ const createEncodedFiles = async (filePath) => {
     if (base64FilePath) {
       console.log(`File encoded in base64: ${base64FilePath}`);;
     }
+    await fs.promises.unlink(filePath); // Delete the original file
   } catch (err) {
     console.log(`File ${filePath} does not exist`);
   }
@@ -62,7 +63,7 @@ const createEncodedFiles = async (filePath) => {
 
 const filePath = './1.5/test.js';
 const fileName = filePath.split('/').pop().split('.').slice(0, -1).join('.');
-
+console.log(fileName);
 createEncodedFiles(filePath)
 
 
@@ -96,8 +97,8 @@ const encryptFile = (filePath, algorithm, key, iv) => {
   });
 };
 
-const hexFilePath = './1.5/test-encoded-hex.txt';
-const base64FilePath = './1.5/test-encoded-base64.txt';
+const hexFilePath = `./1.5/${fileName}-encoded-hex.txt`;
+const base64FilePath = `./1.5/${fileName}-encoded-base64.txt`;
 
 const encryptEncodedFiles = async (hexFilePath, base64FilePath, algorithm, key, iv) => {
   try {
@@ -145,8 +146,8 @@ const decryptFile = (filePath, algorithm, key, iv) => {
 };
 
 // Decode Hex file
-const inputFilePathHex = './1.5/test-encoded-hex.txt'; 
-const outputFilePathHex = './1.5/test-hex-decoded.js'
+const inputFilePathHex = `./1.5/${fileName}-encoded-hex.txt`; 
+const outputFilePathHex = `./1.5/${fileName}-hex-decoded.js`;
 
 function decodeHexFile(inputFilePathHex, outputFilePathHex) {
   fs.access(inputFilePathHex, fs.constants.F_OK, (err) => {
@@ -175,8 +176,8 @@ function decodeHexFile(inputFilePathHex, outputFilePathHex) {
 }
 
 // Decode base64 file
-const inputFilePathBase64 = './1.5/test-encoded-base64.txt'; 
-const outputFilePathBase64 = './1.5/test-base64-decoded.js'
+const inputFilePathBase64 = `./1.5/${fileName}-encoded-base64.txt`; 
+const outputFilePathBase64 = `./1.5/${fileName}-base64-decoded.js`;
 
 function decodeBase64File(inputFilePathBase64, outputFilePathBase64) {
   fs.access(inputFilePathBase64, fs.constants.F_OK, (err) => {
@@ -225,8 +226,8 @@ const decryptEncodedFiles = async (encryptedHexFilePath, encryptedBase64FilePath
   }
 };
 
-const encryptedHexFilePath = './1.5/test-encoded-hex.enc';
-const encryptedBase64FilePath = './1.5/test-encoded-base64.enc';
+const encryptedHexFilePath = `./1.5/${fileName}-encoded-hex.enc`;
+const encryptedBase64FilePath = `./1.5/${fileName}-encoded-base64.enc`;
 
 decryptEncodedFiles(encryptedHexFilePath, encryptedBase64FilePath, algorithm, key, iv);
 
