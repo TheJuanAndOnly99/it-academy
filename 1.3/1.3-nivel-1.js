@@ -24,11 +24,11 @@ createPromise(false)
 // Exercici 2 
 // Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge o un altre (que s'imprimirà per consola) en funció del paràmetre rebut.
 
-let voterStatus = vote => {
+const voterStatus = vote => {
   vote ? console.log("You can vote!") : console.log("Sorry, you cannot vote :(")
 }
 
-let checkVoterStatus = (age, callBack) => {
+const checkVoterStatus = (age, callBack) => {
   const canVote = age < 18 ? false : true;
   callBack(canVote);
 }
