@@ -32,11 +32,9 @@ const getEmployee = (id) => {
     }
     try {
       const employee = employees.find((employee) => employee.id === id);
-      const salary = salaries.find((salary) => salary.id === id);
-  
-      if (employee && salary) {
+      if (employee) {
         // spread syntax
-        resolve({...employee, ...salary});
+        resolve({...employee});
       } else {
         reject(new Error(`Employee with ID: ${id} not found`));
       } 
@@ -45,18 +43,6 @@ const getEmployee = (id) => {
     }
   })
 }
-
-getEmployee(1)
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
-
-getEmployee(3)
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
-
-getEmployee(6)
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
 
 // Exercici 2
 // Crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un objecte employee i retorni el seu salari.
@@ -72,8 +58,8 @@ const getSalary = (employee) => {
       const salaryObj = salaries.find((salary => salary.id === id));
 
       if (salaryObj !== undefined) {
-        let employeeSalary = {...salaryObj, ...employee};
-        resolve(`Employee: ${employeeSalary.name} has salary: ${employeeSalary.salary}`);
+        let employeeSalaryObj = {...salaryObj, ...employee};
+        resolve(employeeSalaryObj);
       } else {
         reject(new Error(`Employee ${employee.name} not found`));
       }
@@ -83,32 +69,18 @@ const getSalary = (employee) => {
   })
 }
 
-getSalary({id: 3, name: 'Jeff Bezos'})
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
-
-getSalary({id: 5, name: 'Beff Jezos'})
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
-
-getSalary({id: 'Beff Jezos', name: 5})
-  .then(res => console.log(res))
-  .catch(err => console.log(err.message));
-
 // Exercici 3
 // Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises de manera que es retorni per la consola el nom de l'empleat/da i el seu salari.
 
-getEmployee(1)
-  .then(res => getSalary(res))
-    .then(res => console.log(res))
-    .catch(err => console.log(err.message))
-  .catch(err => console.log(err.message));
-
-getEmployee(7)
-  .then(res => getSalary(res))
-    .then(res => console.log(res))
-    .catch(err => console.log(err.message))
-  .catch(err => console.log(err.message));
+function showEmployeeWithSalary(id) {
+  getEmployee(id)
+    .then(getSalary)
+      .then(res => console.log(`Employee: ${res.name} has salary: $${res.salary}`))
+      .catch(err => console.log(err.message))
+    .catch(err => console.log(err.message));
+}
+  
+showEmployeeWithSalary(1);
 
 // export functions
 module.exports.getEmployee = getEmployee;
