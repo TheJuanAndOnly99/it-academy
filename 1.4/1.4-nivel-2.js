@@ -12,7 +12,7 @@ function doubleAfter2Seconds(num) {
   });
 }
 
-doubleAfter2Seconds(2).then(res => console.log(res));
+// doubleAfter2Seconds(2).then(res => console.log(res));
 
 // Crea una altra funció que rebi tres números i calculi la suma dels seus dobles fent servir la funció anterior.
 
@@ -31,7 +31,7 @@ async function sumDoublesV2(...nums) {
   return doubles.reduce((total, num) => total + num, 0);
 }
 
-sumDoublesV2(2, 3, 4).then(res => console.log(res));
+// sumDoublesV2(2, 3, 4).then(res => console.log(res));
 
 module.exports.doubleAfter2Seconds = doubleAfter2Seconds;
 module.exports.sumDoublesV2 = sumDoublesV2;

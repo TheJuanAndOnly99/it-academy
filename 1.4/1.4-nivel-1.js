@@ -14,8 +14,8 @@ const logEmployeeSalary = async (id) => {
   }
 };
 
-logEmployeeSalary(1); 
-logEmployeeSalary(15); 
+// logEmployeeSalary(1); 
+// logEmployeeSalary(15); 
 
 
 // Exercici 2
@@ -35,7 +35,7 @@ function wait() {
   });
 }
 
-asyncFunction();
+// asyncFunction();
 
 module.exports.logEmployeeSalary = logEmployeeSalary;
 module.exports.asyncFunction = asyncFunction;

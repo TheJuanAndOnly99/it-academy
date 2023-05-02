@@ -3,12 +3,12 @@
 const { logEmployeeSalary } = require ('../1.4/1.4-nivel-1');
 const { doubleAfter2Seconds, sumDoublesV2 } = require ('../1.4/1.4-nivel-2');
 
-logEmployeeSalary(true); 
+// logEmployeeSalary(true); 
 logEmployeeSalary(5);
-logEmployeeSalary(null);
-logEmployeeSalary(undefined);
-logEmployeeSalary("Thomas");
+// logEmployeeSalary(null);
+// logEmployeeSalary(undefined);
+// logEmployeeSalary("Thomas");
 
-doubleAfter2Seconds('Hi');
+// doubleAfter2Seconds('Hi');
 
-sumDoublesV2(1, 5, "hi"); // 
+// sumDoublesV2(1, 5, "hi"); 
