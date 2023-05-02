@@ -52,4 +52,8 @@ patrick.sayName();
 bob.check(); // returns true for both the Person & Teacher class
 bob.sayName();
 
+module.exports.Person = Person;
+module.exports.Teacher = Teacher;
+
+
 

@@ -26,3 +26,5 @@ const juan = new Person("Juan");
 
 // Call dirNom() method on object juan
 juan.sayName();
+
+module.exports.Person = Person;
