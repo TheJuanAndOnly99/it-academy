@@ -2,27 +2,7 @@
 // Exercici 1
 // Donats els objectes employees i salaries, crea una arrow function getEmployee() que retorni una Promise efectuant la cerca en l'objecte pel seu id.
 
-const employees = [{
-  id: 1,
-  name: 'Linus Torvalds'
-}, {
-  id: 2,
-  name: 'Bill Gates'
-},{
-  id: 3,
-  name: 'Jeff Bezos'
-}];
-
-const salaries = [{
-  id: 1,
-  salary: 4000
-}, {
-  id: 2,
-  salary: 1000
-}, {
-  id: 3,
-  salary: 2000
-}];
+const { employees, salaries } = require('./data.json');
 
 const getEmployee = (id) => {
   return new Promise((resolve, reject) => {
@@ -30,6 +10,7 @@ const getEmployee = (id) => {
     if (typeof id !== 'number' || isNaN(id)) {
       throw new TypeError('Invalid argument: id must be a number');
     }
+    console.log(employees);
     try {
       const employee = employees.find((employee) => employee.id === id);
       if (employee) {
@@ -80,7 +61,7 @@ function showEmployeeWithSalary(id) {
     .catch(err => console.log(err.message));
 }
   
-showEmployeeWithSalary(1);
+// showEmployeeWithSalary(1);
 
 // export functions
 module.exports.getEmployee = getEmployee;
