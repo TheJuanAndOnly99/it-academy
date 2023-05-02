@@ -34,4 +34,4 @@ async function sumDoublesV2(...nums) {
 sumDoublesV2(2, 3, 4).then(res => console.log(res));
 
 module.exports.doubleAfter2Seconds = doubleAfter2Seconds;
-module.exports.sumDoubles = sumDoubles;
+module.exports.sumDoublesV2 = sumDoublesV2;

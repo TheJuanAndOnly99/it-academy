@@ -24,6 +24,7 @@ logEmployeeSalary(15);
 async function asyncFunction() {
   const res = await wait();
   console.log(res);
+  return res;
 }
 
 function wait() {
@@ -37,3 +38,5 @@ function wait() {
 asyncFunction();
 
 module.exports.logEmployeeSalary = logEmployeeSalary;
+module.exports.asyncFunction = asyncFunction;
+module.exports.wait = wait;
