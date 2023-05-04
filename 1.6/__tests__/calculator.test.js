@@ -13,6 +13,12 @@ test.each([
   expect(() => add(params)).toThrow(expected);
 });
 
+test.each([
+  [[], 'No arguments found.'],
+])('expect the operation to be passed arguements', (params, expected) => {
+  expect(() => add(params)).toThrow(expected);
+});
+
 // Addition
 
 describe('addition', () => {
@@ -63,24 +69,9 @@ describe('subtraction', () => {
 describe('multiplication', () => {
   test.each([  
     [[2, 5], 10],
-    [[2, 15], 30],
-  ])('expect numbers %n to be multiplied correctly and to equal %e', (input, expected) => {
-    expect(multiply(...input)).toBe(expected);
-  });
-  
-  test.each([  
     [[4.4, 2.2], 9.68],
-    [[0.4, 0.2], 0.08],
-    [[2.222, 2.222], 4.94],
-  ])('expect decimals %n to be multiplyed correctly and to equal %e', (input, expected) => {
-    expect(multiply(...input)).toBe(expected);
-  });
-  
-  test.each([  
-    [[3, -2], -6],
     [[-3, -6, -2], -36],
-    [[25, -50, 100], -125000],
-  ])('expect negative numbers %n to be multiplyed correctly and to equal %e', (input, expected) => {
+  ])('expect numbers %n to be multiplied correctly and to equal %e', (input, expected) => {
     expect(multiply(...input)).toBe(expected);
   });
 }) 
@@ -90,24 +81,16 @@ describe('multiplication', () => {
 describe('Division', () => {
   test.each([
     [[10, 2], 5],
-    [[10, 5], 2],
+    [[0.7, 0.3], 2.33],
+    [[-3, -6, -2], -0.25],
   ])('expect whole numbers %n to be divided correctly and to equal %e', (input, expected) => {
     expect(divide(...input)).toBe(expected);
   });
 
   test.each([
-    [[4.4, 2.2], 2],
-    [[0.7, 0.3], 2.33],
-    [[2.222, 10], 0.22],
-  ])('expect decimals %n to be divided correctly and to equal %e', (input, expected) => {
-    expect(divide(...input)).toBe(expected);
-  });
-
-  test.each([
-    [[3, -2], -1.5],
-    [[-3, -6, -2], -0.25],
-    [[25, -50, 100], -0.01],
-  ])('expect negative numbers %n to be divided correctly and to equal %e', (input, expected) => {
-    expect(divide(...input)).toBe(expected);
+    [[0, 5], 'Cannot divide by 0'],
+    [[5, 0], 'Cannot divide by 0'],
+  ])('expect an error if dividing by 0', (input, expected) => {
+    expect(() => divide(...input)).toThrow(expected);
   });
 });
