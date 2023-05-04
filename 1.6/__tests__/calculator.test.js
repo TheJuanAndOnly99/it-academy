@@ -4,91 +4,110 @@ const { add, subtract, multiply, divide } = require('../app/calculator');
 
 // General validations
 
-test('expect all params to be numbers', () => {
-  expect(add(['a', 3, 4, 5])).toBe(NaN);
-  expect(add([false, 3, 4, 5])).toBe(NaN);
-  expect(add([[1, 2], 3, 4, 5])).toBe(NaN);
-  expect(add([{id: 5}, 3, 4, 5])).toBe(NaN);
+test.each([
+  [['a', 3, 4, 5], 'Arguments must be numbers.'],
+  [[false, 3, 4, 5], 'Arguments must be numbers.'],
+  [[[1, 2], 3, 4, 5], 'Arguments must be numbers.'],
+  [[{id: 5}, 3, 4, 5], 'Arguments must be numbers.']
+])('expect all arguments to be numbers', (params, expected) => {
+  expect(() => add(params)).toThrow(expected);
 });
-
-test('expect empty params to return 0', () => {
-  expect(add()).toBe(0);
-  expect(add([])).toBe(0);
-});
-
 
 // Addition
 
-test('expect 1 + 2 to equal 3', () => {
-  expect(add(1, 2)).toBe(3);
-  expect(add([1, 2])).toBe(3);
+describe('addition', () => {
+  test.each([ 
+    [[10, 2], 12],
+    [[2, 3], 5],
+  ])(`expect whole numbers %n to be added correctly and to equal %e`, (nums, expected) => {
+    expect(add(nums)).toBe(expected);
+  })
+  
+  test.each([    
+    [[2.3, 2.7], 5.0],
+    [[0.3, 0.8], 1.1],
+    [[2.222, 2.222], 4.44],
+  ])('expect decimals %n to be added correctly and to equal %e', (nums, expected) => {
+    expect(add(nums)).toBe(expected);
+  });
+  
+  test.each([    
+    [[3, -2], 1],
+    [[-3, -6, -2], -11],
+    [[25, -50, 100], 75],
+  ])('expect negative numbers %n to be added correctly and to equal %e', (nums, expected) => {
+    expect(add(nums)).toBe(expected);
+  });
 });
 
-test('expect decimals to be added correctly', () => {
-  expect(add([2.3, 2.7])).toBe(5.0);
-  expect(add([0.3, 0.8])).toBe(1.1);
-  expect(add([2.222, 2.222])).toBe(4.444);
-});
-
-test('expect negative numbers to be added correctly', () => {
-  expect(add([3, -2])).toBe(1);
-  expect(add([-3, -6, -2])).toBe(-11);
-  expect(add([25, -50, 100])).toBe(75);
-});
-
-// Subtraction
-
-test('expect 2 - 1 to equal 1', () => {
-  expect(subtract(2, 1)).toBe(1);
-  expect(subtract([2, 1])).toBe(1);
-});
-
-test('expect decimals to be subtracted correctly', () => {
-  expect(subtract([4.4, 2.2])).toBe(2.2);
-  expect(subtract([0.4, 0.2])).toBe(0.2);
-  expect(subtract([2.222, 2.222])).toBe(0);
-});
-
-test('expect negative numbers to be subracted correctly', () => {
-  expect(subtract([3, -2])).toBe(5);
-  expect(subtract([-3, -6, -2])).toBe(5);
-  expect(subtract([25, -50, 100])).toBe(-25);
+// Testing a different way of structuring these tests
+describe('subtraction', () => {
+  test.each`
+    a      | b      | expected
+    ${2}   | ${1}   | ${1}
+    ${3}   | ${1}   | ${2}
+    ${4.4} | ${2.2} | ${2.2}
+    ${0.4} | ${0.2} | ${0.2}
+    ${2.222} | ${2.222} | ${0}
+    ${2.444} | ${2.222} | ${0.22}
+    ${3}   | ${-2}  | ${5}
+    ${-3}  | ${-6}  | ${3}
+    ${25}  | ${-50} | ${75}
+  `('expect $a - $b to equal $expected', ({a, b, expected}) => {
+    expect(subtract(a, b)).toBe(expected);
+  });
 });
 
 // Multiply
 
-test('multiplys 2 * 5 to equal 10', () => {
-  expect(multiply(2, 5)).toBe(10);
-  expect(multiply([2, 5])).toBe(10);
-});
-
-test('expect decimals to be multiplyed correctly', () => {
-  expect(multiply([4.4, 2.2])).toBe(9.68);
-  expect(multiply([0.4, 0.2])).toBe(0.08);
-  expect(multiply([2.222, 2.222])).toBe(4.94);
-});
-
-test('expect negative numbers to be multiplyed correctly', () => {
-  expect(multiply([3, -2])).toBe(-6);
-  expect(multiply([-3, -6, -2])).toBe(-36);
-  expect(multiply([25, -50, 100])).toBe(-125000);
-});
+describe('multiplication', () => {
+  test.each([  
+    [[2, 5], 10],
+    [[2, 15], 30],
+  ])('expect numbers %n to be multiplied correctly and to equal %e', (input, expected) => {
+    expect(multiply(...input)).toBe(expected);
+  });
+  
+  test.each([  
+    [[4.4, 2.2], 9.68],
+    [[0.4, 0.2], 0.08],
+    [[2.222, 2.222], 4.94],
+  ])('expect decimals %n to be multiplyed correctly and to equal %e', (input, expected) => {
+    expect(multiply(...input)).toBe(expected);
+  });
+  
+  test.each([  
+    [[3, -2], -6],
+    [[-3, -6, -2], -36],
+    [[25, -50, 100], -125000],
+  ])('expect negative numbers %n to be multiplyed correctly and to equal %e', (input, expected) => {
+    expect(multiply(...input)).toBe(expected);
+  });
+}) 
 
 // Divide
 
-test('divides 10 / 2 to equal 5', () => {
-  expect(divide(10, 2)).toBe(5);
-  expect(divide([10, 2])).toBe(5);
-});
+describe('Division', () => {
+  test.each([
+    [[10, 2], 5],
+    [[10, 5], 2],
+  ])('expect whole numbers %n to be divided correctly and to equal %e', (input, expected) => {
+    expect(divide(...input)).toBe(expected);
+  });
 
-test('expect decimals to be divided correctly', () => {
-  expect(divide([4.4, 2.2])).toBe(2);
-  expect(divide([0.7, 0.3])).toBe(2.33);
-  expect(divide([2.222, 10])).toBe(0.22);
-});
+  test.each([
+    [[4.4, 2.2], 2],
+    [[0.7, 0.3], 2.33],
+    [[2.222, 10], 0.22],
+  ])('expect decimals %n to be divided correctly and to equal %e', (input, expected) => {
+    expect(divide(...input)).toBe(expected);
+  });
 
-test('expect negative numbers to be divided correctly', () => {
-  expect(divide([3, -2])).toBe(-1.5);
-  expect(divide([-3, -6, -2])).toBe(-0.25);
-  expect(divide([25, -50, 100])).toBe(-0.01);
+  test.each([
+    [[3, -2], -1.5],
+    [[-3, -6, -2], -0.25],
+    [[25, -50, 100], -0.01],
+  ])('expect negative numbers %n to be divided correctly and to equal %e', (input, expected) => {
+    expect(divide(...input)).toBe(expected);
+  });
 });

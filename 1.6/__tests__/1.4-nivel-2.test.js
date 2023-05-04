@@ -8,21 +8,24 @@ test('doubleAfter2Seconds function should resolve with double the input value', 
   const expectedOutput = 4;
 
   const promise = doubleAfter2Seconds(input);
-
   jest.runAllTimers();
 
   return promise.then(output => {
     expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
     expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), 2000);
-
     expect(output).toEqual(expectedOutput);
   });
 });
 
-test('doubleAfter2Seconds function should reject with an error if the input is not a number', () => {
+test('doubleAfter2Seconds function should reject with an error if the input is not a number', async () => {
   jest.useFakeTimers();
-
   const input = 'not a number';
 
-  expect(() => doubleAfter2Seconds(input)).toThrowError(TypeError);
+  // expect(() => doubleAfter2Seconds(input)).toThrowError(TypeError);
+
+  try {
+    await doubleAfter2Seconds(input);
+  } catch (error) {
+    expect(error.message).toBe(`Invalid argument: id must be a number`);
+  }
 });

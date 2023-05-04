@@ -26,6 +26,7 @@ describe('checkVoterStatus', () => {
   test('should return true if the age is greater than or equal to 18', () => {
     const callBack = jest.fn();
     const result = checkVoterStatus(18, callBack);
+    
     expect(result).toBe(true);
     expect(callBack).toHaveBeenCalledWith(true);
   });
@@ -33,6 +34,7 @@ describe('checkVoterStatus', () => {
   test('should return false if the age is less than 18', () => {
     const callBack = jest.fn();
     const result = checkVoterStatus(17, callBack);
+
     expect(result).toBe(false);
     expect(callBack).toHaveBeenCalledWith(false);
   });

@@ -22,7 +22,7 @@ function divide(...nums) {
 
 function calculate(operation, ...nums) {
   if (!nums.every(num => typeof(num) === 'number')) {
-    return NaN;
+    throw new Error('Arguments must be numbers.');
   }
   let result;
   switch (operation) {
@@ -44,20 +44,12 @@ function calculate(operation, ...nums) {
       for (let i = 1; i < nums.length; i++) {
         result /= nums[i];
       }
-      result = parseFloat(result.toFixed(2)); // Round to 2 decimal places
       break;
     default:
-      return NaN;
+      throw new Error('Incorrect operation');
   }
-  
+  result = parseFloat(result.toFixed(2)); // Round to 2 decimal places
   return result;
 }
-
-// Example usage:
-console.log(add(2.5, 2.5));      
-console.log(subtract(10, 2)); 
-console.log(multiply(2, 3));   
-console.log(divide(10, 2));    
-
 
 module.exports = { add, subtract, multiply, divide };

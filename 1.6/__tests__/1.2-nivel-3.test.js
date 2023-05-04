@@ -1,5 +1,5 @@
 // Verifica mitjançant tests la creació d'instàncies de la classe abstracta de l'exercici Classes & Arrow Functions N3 E1.
-const { Person, Teacher } = require('../../1.2/1.2-nivel-3');
+const { Person, createPersonObject } = require('../../1.2/1.2-nivel-3');
 
 describe('Person', () => {
   it('should throw an error when instantiated directly', () => {
@@ -7,12 +7,9 @@ describe('Person', () => {
   });
 
   it('should allow creation of instances through a subclass', () => {
-    const teacher = new Teacher('Bob', 'Sponge', 22);
+    const human = createPersonObject('Bob');
 
-    expect(teacher).toBeInstanceOf(Person);
-    expect(teacher).toBeInstanceOf(Teacher);
-    expect(teacher.fName).toBe('Bob');
-    expect(teacher.lName).toBe('Sponge');
-    expect(teacher.age).toBe(22);
+    expect(human).toBeInstanceOf(Person);
+    expect(human.firstName).toBe('Bob');
   });
 });
