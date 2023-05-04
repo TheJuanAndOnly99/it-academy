@@ -24,6 +24,8 @@ class Person {
 // Create object 
 const juan = new Person("Juan");
 
+console.log(juan.name)
+
 // Call dirNom() method on object juan
 juan.sayName();
 
