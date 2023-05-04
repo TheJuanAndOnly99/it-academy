@@ -45,7 +45,7 @@ const getSalary = (employee) => {
         reject(new Error(`Employee ${employee.name} not found`));
       }
     } catch (error) {
-      reject(error);
+      reject(error.message);
     }
   })
 }
